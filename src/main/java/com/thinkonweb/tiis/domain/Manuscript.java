@@ -3,7 +3,7 @@ package com.thinkonweb.tiis.domain;
 
 import java.util.List;
 
-public class Article {
+public class Manuscript {
     private String title;
     private String Abstract;
     private String doi;
