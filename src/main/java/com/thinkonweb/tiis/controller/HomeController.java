@@ -22,4 +22,9 @@ public class HomeController {
 
         return "greeting";
     }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
 }

@@ -6,5 +6,9 @@
 </head>
 <body>
 <p th:text="'Hello, ' + ${name} + '!'" />
+<!-- logout 시 post요청을 권장 -->
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>
