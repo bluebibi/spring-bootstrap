@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form action="#" th:action="@{/manuscript/upload}" th:object="${manuscript}" method="post">
+    <div align="center">
+    <span id="title">Manuscript Upload</span>
+    </div>
+        
+    <div><b>Title</b></div>
+    <div><input type="text" name="title" size="62" /><br/></div>
+
+    <div><b>Author</b><br/>ex)Doo-Soon Park, Mohammad S. Obaidat <b>and</b> Habib F. Rashvand</div>
+
+    <div><input type="text" name="author" size="80" /><br/></div>
+
+    <div><b>Doi</b><br/>ex)10.3745/JIPS.2011.7.4.691</div>
+
+    <div><input type="text" name="doi" size="80" /><br/></div>
+
+    <div><b>Year</b></div>
+    <div><input type="text" name="year" value="2015" size="62" /><br/></div>
+
+    <div><b>Volume</b></div>
+    <div><input type="text" name="volume" size="62" /><br/></div>
+
+    <div><b>No</b></div>
+    <div><input type="text" name="number" size="62" /><br/></div>
+
+    <div><b>Start Page</b></div>
+    <div><input type="text" name="startpage" size="62" /><br/></div>
+
+
+    <div><b>End Page</b></div>
+    <div><input type="text" name="endpage" size="62" /><br/></div>
+
+
+    <div><b>Abstract</b></div>
+
+
+    <div><textarea name="abstract" rows="10" cols="70" /><br/></div>
+
+
+    <div><b>Keywords</b><br/>ex)Proxy Mobile IPv6, Handover, Partial Bicasting, Simulation Analysis</div>
+
+
+    <div><input type="text" name="keyword" size="80" /><br/></div>
+
+
+    <div><b>Pdf file</b><br/>Upload FileName ex) JIPS_v10_no2_paper6.pdf or JIPS_OF_paper1</div>
+
+
+    <div><input type="file" name="upfile" /><br/></div>
+
+
+    <div><input type="checkbox" name="chbox" value="fp" />Featured Paper<input type="checkbox" name="chbox" value="of" />Online First<br/></div>
+
+
+    <div align="right"><input type="submit" value="Upload" /></div>
+
+</form>
+</body>
+</html>
