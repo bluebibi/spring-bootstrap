@@ -12,7 +12,6 @@
 hs_err_pid*
 
 /target
-*.class
 pom.properties
 Thumbs.db
 .settings

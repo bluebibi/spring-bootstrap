@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.thinkonweb</groupId>
-	<artifactId>tiis</artifactId>
+	<artifactId>domesticConf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>tiis</name>
-	<description>TIIS website</description>
+	<name>domesticConf</name>
+	<description>Domestic Conference Website</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -100,6 +100,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-
 </project>
