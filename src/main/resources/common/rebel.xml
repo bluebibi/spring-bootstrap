@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns="http://www.zeroturnaround.com"
+			 si:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd"
+			 xmlns:si="http://java.sun.com/xml/ns/j2ee" xmlns:si="http://java.sun.com/xml/ns/javaee"
+			 xsi:schemaLocation="http://www.zeroturnaround.com ">
+
+	<classpath>
+		<dir name="/Users/yhhan/git/domesticConf/target/classes">
+		</dir>
+	</classpath>
+
+	<web>
+		<link target="/">
+			<dir name="/Users/yhhan/git/domesticConf/src/main/webapp">
+			</dir>
+		</link>
+	</web>
+
+</application>

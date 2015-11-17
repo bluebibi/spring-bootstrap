@@ -1,17 +1,19 @@
 package com.thinkonweb.domesticConf;
 
-import com.thinkonweb.domesticConf.mapper.ConferenceMapper;
+import com.thinkonweb.domesticConf.service.ConferenceService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
+
+import javax.inject.Inject;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,23 +22,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {Application.class, MybatisConfiguration.class})
-@ActiveProfiles("dev")
 @WebAppConfiguration
+@ContextConfiguration(
+		{
+				"file:src/main/resources/common/spring.xml",
+				"file:src/main/resources/common/security.xml",
+				"file:src/main/resources/common/mybatis.xml"
+		}
+)
 public class ApplicationTests {
 	private MockMvc mockMvc;
 
-	@Value("${spring.datasource.url}")
-	private String url;
-
-	@Value("${spring.datasource.username}")
-	private String username;
-
-	@Autowired
+	@SuppressWarnings("SpringJavaAutowiringInspection")
+	@Inject
 	protected WebApplicationContext wac;
 
-	@Autowired
-	private ConferenceMapper conferenceMapper;
+	@Value("${prod}")
+	private boolean prod;
+
+	@Value("${jdbc.url}")
+	private String jdbcUrl;
+
+	@Value("${message}")
+	private String message;
+
+	@Inject
+	private ConferenceService conferenceService;
+
+	@Inject
+	private PasswordEncoder passwordEncoder;
 
 	@Before
 	public void setup() {
@@ -45,20 +59,26 @@ public class ApplicationTests {
 
 	@Test
 	public void contextLoads() throws Exception {
-		System.out.println(url);
-		System.out.println(username);
+		System.out.println(prod);
+		System.out.println(message);
 	}
 
 	@Test
 	public void mvcTest() throws Exception {
-		mockMvc.perform(get("/"))
+		mockMvc.perform(get("/kips2016spring"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("greeting"));
 	}
 
 	@Test
 	public void mapperTest() {
-		assertNotEquals(conferenceMapper, null);
-		System.out.println(conferenceMapper.test());
+		assertNotEquals(conferenceService, null);
+		System.out.println(conferenceService.getConferenceByNameId("kips2016spring"));
 	}
+
+	@Test
+	public void getPassword() {
+        System.out.println(passwordEncoder.encode("admin"));
+        System.out.println(passwordEncoder.encode("kips2016"));
+    }
 }
