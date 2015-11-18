@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `domesticConf` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `domesticConf`;
+CREATE DATABASE  IF NOT EXISTS `wsc` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `wsc`;
 -- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
 --
--- Host: 127.0.0.1    Database: domesticConf
+-- Host: 127.0.0.1    Database: wsc
 -- ------------------------------------------------------
 -- Server version	5.6.20
 
@@ -25,8 +25,12 @@ DROP TABLE IF EXISTS `authorities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `authorities` (
-  `username` varchar(256) DEFAULT NULL,
-  `authority` varchar(256) DEFAULT NULL
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `USER_ID` int(10) unsigned NOT NULL,
+  `ROLE` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_A1_idx` (`USER_ID`),
+  CONSTRAINT `FK_A1` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -36,40 +40,34 @@ CREATE TABLE `authorities` (
 
 LOCK TABLES `authorities` WRITE;
 /*!40000 ALTER TABLE `authorities` DISABLE KEYS */;
-INSERT INTO `authorities` VALUES ('admin','ROLE_ADMIN'),('user','ROLE_USER');
 /*!40000 ALTER TABLE `authorities` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `conference`
+-- Table structure for table `temperature`
 --
 
-DROP TABLE IF EXISTS `conference`;
+DROP TABLE IF EXISTS `temperature`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `conference` (
-  `id` int(32) unsigned NOT NULL AUTO_INCREMENT,
-  `nameId` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `name` varchar(1000) DEFAULT NULL,
-  `hostingInstitution` varchar(500) DEFAULT NULL,
-  `location` varchar(300) DEFAULT NULL,
-  `submissionDueDate` datetime DEFAULT NULL,
-  `conferenceStartDate` datetime DEFAULT NULL,
-  `conferenceEndDate` datetime DEFAULT NULL,
-  `creationTime` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nameId_UNIQUE` (`nameId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE `temperature` (
+  `ID` int(32) unsigned NOT NULL AUTO_INCREMENT,
+  `sensor_id` varchar(45) NOT NULL,
+  `temperature` float NOT NULL,
+  `datetime` datetime NOT NULL,
+  `location` varchar(500) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `conference`
+-- Dumping data for table `temperature`
 --
 
-LOCK TABLES `conference` WRITE;
-/*!40000 ALTER TABLE `conference` DISABLE KEYS */;
-INSERT INTO `conference` VALUES (1,'kips2016spring','2016 한국정보처리학회 춘계학술대회','한국정보처리학회','숙명여자대학교','2016-05-04 00:00:00','2016-05-29 00:00:00','2016-05-30 00:00:00','2015-11-16 22:29:06');
-/*!40000 ALTER TABLE `conference` ENABLE KEYS */;
+LOCK TABLES `temperature` WRITE;
+/*!40000 ALTER TABLE `temperature` DISABLE KEYS */;
+INSERT INTO `temperature` VALUES (1,'temp1',45.1,'2015-10-08 23:01:21','4st Floor, 4th Engineering Building, KoreaTech'),(6,'temp3',37,'2015-10-08 22:45:01','2nd Floor, 4th Engineering Building, KoreaTech');
+/*!40000 ALTER TABLE `temperature` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -80,11 +78,12 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(32) unsigned NOT NULL,
-  `username` varchar(256) DEFAULT NULL,
-  `password` varchar(256) DEFAULT NULL,
-  `enabled` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `EMAIL` varchar(45) DEFAULT NULL,
+  `NAME` varchar(45) DEFAULT NULL,
+  `PASSWORD` varchar(256) DEFAULT NULL,
+  `AGE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -94,7 +93,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','2d9e31e5b7fc8b949bf619cbf093d9b6b7ddb0908d1ef33b508b5906d79c40aba586a914d516dc78',1),(2,'user','c5222e323f07d4d522a1156a88dfb8f332998c3751432d836979692693c9e2000c9528db298fb995',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -107,7 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-18 10:45:51
-
-
-
+-- Dump completed on 2015-11-18 10:46:18
