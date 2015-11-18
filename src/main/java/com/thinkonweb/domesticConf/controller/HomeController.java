@@ -17,6 +17,11 @@ public class HomeController {
     @Inject
     private ConferenceService conferenceService;
 
+    @RequestMapping("/")
+    public String home(Model model) {
+        return greeting("kips2016spring", model);
+    }
+
     @RequestMapping("/{nameId}")
     public String greeting(@PathVariable(value="nameId") String nameId, Model model) {
         model.addAttribute("conference", conferenceService.getConferenceByNameId(nameId));
